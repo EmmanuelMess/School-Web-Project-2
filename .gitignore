@@ -1,6 +1,7 @@
 ######################
 # Project Specific
 ######################
+/src/main/webapp/content/css/main.css
 /build/www/**
 /src/test/javascript/coverage/
 
@@ -142,4 +143,3 @@ Desktop.ini
 # ESLint
 ######################
 .eslintcache
-/start_db_server.sh

@@ -23,7 +23,7 @@
     "enableSwaggerCodegen": false,
     "jwtSecretKey": "ZGM3YmFhYzNkZDE5YWIzMTM0ODE3NTJkYWQ3OGU5OTIyYTAxNGRhMzU0NjI4ZTY2MjZmNmYxYjUxMmU0MTQxZDU5NmM4NTY0NjE5YjFmN2E0MjFkZWYzN2UzM2JiNDBlZDA0MzQ3NGI0ZWVhOWY1MzQzZDE1MWI4OTEzYjIxM2E=",
     "clientFramework": "angularX",
-    "useSass": false,
+    "useSass": true,
     "clientPackageManager": "npm",
     "testFrameworks": [],
     "jhiPrefix": "jhi",

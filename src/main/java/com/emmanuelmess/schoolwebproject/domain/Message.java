@@ -29,8 +29,7 @@ public class Message implements Serializable {
     @Column(name = "content", nullable = false)
     private String content;
 
-    @OneToOne
-    @JoinColumn(unique = true)
+    @OneToOne    @JoinColumn(unique = true)
     private ThreadMessage threadMessage;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
