@@ -1,0 +1,46 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-message-heading">Create or edit a Message</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!message.id">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="message.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_content">Content</label>
+                    <input type="text" class="form-control" name="content" id="field_content"
+                        [(ngModel)]="message.content" required minlength="1"/>
+                    <div [hidden]="!(editForm.controls.content?.dirty && editForm.controls.content?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.content?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.content?.errors?.minlength">
+                        This field is required to be at least 1 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_threadMessage">Thread Message</label>
+                    <select class="form-control" id="field_threadMessage" name="threadMessage" [(ngModel)]="message.threadMessage">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="threadMessageOption.id === message.threadMessage?.id ? message.threadMessage : threadMessageOption" *ngFor="let threadMessageOption of threadmessages; trackBy: trackThreadMessageById">{{threadMessageOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

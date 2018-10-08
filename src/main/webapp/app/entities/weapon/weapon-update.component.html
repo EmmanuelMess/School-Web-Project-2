@@ -41,6 +41,13 @@
                     </div>
                 </div>
 
+                <div class="form-group">
+                    <label class="form-control-label" for="field_thread">Thread</label>
+                    <select class="form-control" id="field_thread" name="thread" [(ngModel)]="weapon.thread" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="threadOption.id === weapon.thread?.id ? weapon.thread : threadOption" *ngFor="let threadOption of threads; trackBy: trackThreadById">{{threadOption.id}}</option>
+                    </select>
+                </div>
             </div>
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">

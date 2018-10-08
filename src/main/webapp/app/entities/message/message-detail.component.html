@@ -1,26 +1,18 @@
 <div class="row justify-content-center">
     <div class="col-8">
-        <div *ngIf="weapon">
-            <h2><span>Weapon</span> {{weapon.id}}</h2>
+        <div *ngIf="message">
+            <h2><span>Message</span> {{message.id}}</h2>
             <hr>
             <jhi-alert-error></jhi-alert-error>
             <dl class="row-md jh-entity-details">
-                <dt><span>Name</span></dt>
+                <dt><span>Content</span></dt>
                 <dd>
-                    <span>{{weapon.name}}</span>
+                    <span>{{message.content}}</span>
                 </dd>
-                <dt><span>Description</span></dt>
+                <dt><span>Thread Message</span></dt>
                 <dd>
-                    <span>{{weapon.description}}</span>
-                </dd>
-                <dt><span>Image Name</span></dt>
-                <dd>
-                    <span>{{weapon.imageName}}</span>
-                </dd>
-                <dt><span>Thread</span></dt>
-                <dd>
-                    <div *ngIf="weapon.thread">
-                        <a [routerLink]="['/thread', weapon.thread?.id, 'view']">{{weapon.thread?.id}}</a>
+                    <div *ngIf="message.threadMessage">
+                        <a [routerLink]="['/thread-message', message.threadMessage?.id, 'view']">{{message.threadMessage?.id}}</a>
                     </div>
                 </dd>
             </dl>
@@ -32,7 +24,7 @@
             </button>
 
             <button type="button"
-                    [routerLink]="['/weapon', weapon.id, 'edit']"
+                    [routerLink]="['/message', message.id, 'edit']"
                     class="btn btn-primary">
                 <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
             </button>

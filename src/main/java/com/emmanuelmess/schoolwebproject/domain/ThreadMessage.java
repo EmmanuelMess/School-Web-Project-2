@@ -5,18 +5,17 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
 
 import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * A Weapon.
+ * A ThreadMessage.
  */
 @Entity
-@Table(name = "weapon")
+@Table(name = "thread_message")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-public class Weapon implements Serializable {
+public class ThreadMessage implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -24,18 +23,6 @@ public class Weapon implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
-
-    @NotNull
-    @Size(min = 1)
-    @Column(name = "name", nullable = false)
-    private String name;
-
-    @Column(name = "description")
-    private String description;
-
-    @NotNull
-    @Column(name = "image_name", nullable = false)
-    private String imageName;
 
     @ManyToOne
     @JsonIgnoreProperties("")
@@ -50,50 +37,11 @@ public class Weapon implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public Weapon name(String name) {
-        this.name = name;
-        return this;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public Weapon description(String description) {
-        this.description = description;
-        return this;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getImageName() {
-        return imageName;
-    }
-
-    public Weapon imageName(String imageName) {
-        this.imageName = imageName;
-        return this;
-    }
-
-    public void setImageName(String imageName) {
-        this.imageName = imageName;
-    }
-
     public Thread getThread() {
         return thread;
     }
 
-    public Weapon thread(Thread thread) {
+    public ThreadMessage thread(Thread thread) {
         this.thread = thread;
         return this;
     }
@@ -111,11 +59,11 @@ public class Weapon implements Serializable {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Weapon weapon = (Weapon) o;
-        if (weapon.getId() == null || getId() == null) {
+        ThreadMessage threadMessage = (ThreadMessage) o;
+        if (threadMessage.getId() == null || getId() == null) {
             return false;
         }
-        return Objects.equals(getId(), weapon.getId());
+        return Objects.equals(getId(), threadMessage.getId());
     }
 
     @Override
@@ -125,11 +73,8 @@ public class Weapon implements Serializable {
 
     @Override
     public String toString() {
-        return "Weapon{" +
+        return "ThreadMessage{" +
             "id=" + getId() +
-            ", name='" + getName() + "'" +
-            ", description='" + getDescription() + "'" +
-            ", imageName='" + getImageName() + "'" +
             "}";
     }
 }

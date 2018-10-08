@@ -4,32 +4,32 @@ import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { JhiAlertService } from 'ng-jhipster';
 
-import { IWeapon } from 'app/shared/model/weapon.model';
-import { WeaponService } from './weapon.service';
+import { IThreadMessage } from 'app/shared/model/thread-message.model';
+import { ThreadMessageService } from './thread-message.service';
 import { IThread } from 'app/shared/model/thread.model';
 import { ThreadService } from 'app/entities/thread';
 
 @Component({
-    selector: 'jhi-weapon-update',
-    templateUrl: './weapon-update.component.html'
+    selector: 'jhi-thread-message-update',
+    templateUrl: './thread-message-update.component.html'
 })
-export class WeaponUpdateComponent implements OnInit {
-    private _weapon: IWeapon;
+export class ThreadMessageUpdateComponent implements OnInit {
+    private _threadMessage: IThreadMessage;
     isSaving: boolean;
 
     threads: IThread[];
 
     constructor(
         private jhiAlertService: JhiAlertService,
-        private weaponService: WeaponService,
+        private threadMessageService: ThreadMessageService,
         private threadService: ThreadService,
         private activatedRoute: ActivatedRoute
     ) {}
 
     ngOnInit() {
         this.isSaving = false;
-        this.activatedRoute.data.subscribe(({ weapon }) => {
-            this.weapon = weapon;
+        this.activatedRoute.data.subscribe(({ threadMessage }) => {
+            this.threadMessage = threadMessage;
         });
         this.threadService.query().subscribe(
             (res: HttpResponse<IThread[]>) => {
@@ -45,15 +45,15 @@ export class WeaponUpdateComponent implements OnInit {
 
     save() {
         this.isSaving = true;
-        if (this.weapon.id !== undefined) {
-            this.subscribeToSaveResponse(this.weaponService.update(this.weapon));
+        if (this.threadMessage.id !== undefined) {
+            this.subscribeToSaveResponse(this.threadMessageService.update(this.threadMessage));
         } else {
-            this.subscribeToSaveResponse(this.weaponService.create(this.weapon));
+            this.subscribeToSaveResponse(this.threadMessageService.create(this.threadMessage));
         }
     }
 
-    private subscribeToSaveResponse(result: Observable<HttpResponse<IWeapon>>) {
-        result.subscribe((res: HttpResponse<IWeapon>) => this.onSaveSuccess(), (res: HttpErrorResponse) => this.onSaveError());
+    private subscribeToSaveResponse(result: Observable<HttpResponse<IThreadMessage>>) {
+        result.subscribe((res: HttpResponse<IThreadMessage>) => this.onSaveSuccess(), (res: HttpErrorResponse) => this.onSaveError());
     }
 
     private onSaveSuccess() {
@@ -72,11 +72,11 @@ export class WeaponUpdateComponent implements OnInit {
     trackThreadById(index: number, item: IThread) {
         return item.id;
     }
-    get weapon() {
-        return this._weapon;
+    get threadMessage() {
+        return this._threadMessage;
     }
 
-    set weapon(weapon: IWeapon) {
-        this._weapon = weapon;
+    set threadMessage(threadMessage: IThreadMessage) {
+        this._threadMessage = threadMessage;
     }
 }

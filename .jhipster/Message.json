@@ -1,0 +1,32 @@
+{
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "relationships": [
+        {
+            "relationshipName": "threadMessage",
+            "otherEntityName": "threadMessage",
+            "relationshipType": "one-to-one",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "message"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "content",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "minlength"
+            ],
+            "fieldValidateRulesMinlength": "1"
+        }
+    ],
+    "changelogDate": "20181008154945",
+    "dto": "no",
+    "searchEngine": false,
+    "service": "no",
+    "entityTableName": "message",
+    "jpaMetamodelFiltering": false,
+    "pagination": "pagination"
+}

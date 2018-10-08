@@ -11,12 +11,12 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * A Weapon.
+ * A Thread.
  */
 @Entity
-@Table(name = "weapon")
+@Table(name = "thread")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-public class Weapon implements Serializable {
+public class Thread implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -27,19 +27,15 @@ public class Weapon implements Serializable {
 
     @NotNull
     @Size(min = 1)
-    @Column(name = "name", nullable = false)
-    private String name;
+    @Column(name = "title", nullable = false)
+    private String title;
 
-    @Column(name = "description")
-    private String description;
-
-    @NotNull
-    @Column(name = "image_name", nullable = false)
-    private String imageName;
+    @Column(name = "content")
+    private String content;
 
     @ManyToOne
     @JsonIgnoreProperties("")
-    private Thread thread;
+    private User user;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -50,56 +46,43 @@ public class Weapon implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public Weapon name(String name) {
-        this.name = name;
+    public Thread title(String title) {
+        this.title = title;
         return this;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getDescription() {
-        return description;
+    public String getContent() {
+        return content;
     }
 
-    public Weapon description(String description) {
-        this.description = description;
+    public Thread content(String content) {
+        this.content = content;
         return this;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setContent(String content) {
+        this.content = content;
     }
 
-    public String getImageName() {
-        return imageName;
+    public User getUser() {
+        return user;
     }
 
-    public Weapon imageName(String imageName) {
-        this.imageName = imageName;
+    public Thread user(User user) {
+        this.user = user;
         return this;
     }
 
-    public void setImageName(String imageName) {
-        this.imageName = imageName;
-    }
-
-    public Thread getThread() {
-        return thread;
-    }
-
-    public Weapon thread(Thread thread) {
-        this.thread = thread;
-        return this;
-    }
-
-    public void setThread(Thread thread) {
-        this.thread = thread;
+    public void setUser(User user) {
+        this.user = user;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -111,11 +94,11 @@ public class Weapon implements Serializable {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Weapon weapon = (Weapon) o;
-        if (weapon.getId() == null || getId() == null) {
+        Thread thread = (Thread) o;
+        if (thread.getId() == null || getId() == null) {
             return false;
         }
-        return Objects.equals(getId(), weapon.getId());
+        return Objects.equals(getId(), thread.getId());
     }
 
     @Override
@@ -125,11 +108,10 @@ public class Weapon implements Serializable {
 
     @Override
     public String toString() {
-        return "Weapon{" +
+        return "Thread{" +
             "id=" + getId() +
-            ", name='" + getName() + "'" +
-            ", description='" + getDescription() + "'" +
-            ", imageName='" + getImageName() + "'" +
+            ", title='" + getTitle() + "'" +
+            ", content='" + getContent() + "'" +
             "}";
     }
 }

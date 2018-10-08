@@ -3,15 +3,17 @@
     "clientRootFolder": "",
     "relationships": [
         {
-            "relationshipName": "thread",
-            "otherEntityName": "thread",
+            "relationshipName": "user",
+            "otherEntityName": "user",
             "relationshipType": "many-to-one",
-            "otherEntityField": "id"
+            "otherEntityField": "login",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "thread"
         }
     ],
     "fields": [
         {
-            "fieldName": "name",
+            "fieldName": "title",
             "fieldType": "String",
             "fieldValidateRules": [
                 "required",
@@ -20,23 +22,15 @@
             "fieldValidateRulesMinlength": "1"
         },
         {
-            "fieldName": "description",
+            "fieldName": "content",
             "fieldType": "String"
-        },
-        {
-            "fieldName": "imageName",
-            "fieldType": "String",
-            "fieldValidateRules": [
-                "required",
-                "unique"
-            ]
         }
     ],
-    "changelogDate": "20181008151647",
+    "changelogDate": "20181008154733",
     "dto": "no",
     "searchEngine": false,
     "service": "no",
-    "entityTableName": "weapon",
+    "entityTableName": "thread",
     "jpaMetamodelFiltering": false,
-    "pagination": "infinite-scroll"
+    "pagination": "pagination"
 }

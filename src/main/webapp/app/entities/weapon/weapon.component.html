@@ -18,6 +18,7 @@
             <th jhiSortBy="name"><span>Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="description"><span>Description</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="imageName"><span>Image Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="thread.id"><span>Thread</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
             </thead>
@@ -27,6 +28,11 @@
                 <td>{{weapon.name}}</td>
                 <td>{{weapon.description}}</td>
                 <td>{{weapon.imageName}}</td>
+                <td>
+                    <div *ngIf="weapon.thread">
+                        <a [routerLink]="['../thread', weapon.thread?.id, 'view' ]" >{{weapon.thread?.id}}</a>
+                    </div>
+                </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

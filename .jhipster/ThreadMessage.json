@@ -1,0 +1,20 @@
+{
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "relationships": [
+        {
+            "relationshipName": "thread",
+            "otherEntityName": "thread",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [],
+    "changelogDate": "20181008155546",
+    "dto": "no",
+    "searchEngine": false,
+    "service": "no",
+    "entityTableName": "thread_message",
+    "jpaMetamodelFiltering": false,
+    "pagination": "no"
+}
