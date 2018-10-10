@@ -8,10 +8,12 @@ import { RouterModule } from '@angular/router';
 import { SchoolWebProjectSharedModule } from 'app/shared';
 import { HOME_ROUTE, HomeComponent } from './';
 import { WeaponDialogComponent } from './weapon-dialog/weapon-dialog.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
     imports: [
         SchoolWebProjectSharedModule,
+        FlexLayoutModule,
         MatGridListModule,
         MatCardModule,
         MatButtonModule,

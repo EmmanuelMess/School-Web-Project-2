@@ -1,17 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterContentInit, Component, OnInit, ViewChild } from '@angular/core';
 import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { JhiEventManager } from 'ng-jhipster';
+import { ObservableMedia, MediaChange } from '@angular/flex-layout';
 
 import { LoginModalService, Principal, Account } from 'app/core';
 import { WeaponDialogComponent } from 'app/home/weapon-dialog/weapon-dialog.component';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatGridList } from '@angular/material';
+
+const COLUMNS_BY_SIZE = { xl: 8, lg: 6, md: 5, sm: 3, xs: 1 };
 
 @Component({
     selector: 'jhi-home',
     templateUrl: './home.component.html',
     styleUrls: ['home.scss']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, AfterContentInit {
+    @ViewChild('grid') grid: MatGridList;
     account: Account;
     modalRef: NgbModalRef;
     weapons = Array<Weapon>(50);
@@ -20,6 +24,7 @@ export class HomeComponent implements OnInit {
         private principal: Principal,
         private loginModalService: LoginModalService,
         private eventManager: JhiEventManager,
+        private observableMedia: ObservableMedia,
         private dialog: MatDialog
     ) {
         for (let i = 0; i < 50; i++) {
@@ -32,6 +37,12 @@ export class HomeComponent implements OnInit {
             this.account = account;
         });
         this.registerAuthenticationSuccess();
+    }
+
+    ngAfterContentInit() {
+        this.observableMedia.subscribe((change: MediaChange) => {
+            this.grid.cols = COLUMNS_BY_SIZE[change.mqAlias];
+        });
     }
 
     registerAuthenticationSuccess() {

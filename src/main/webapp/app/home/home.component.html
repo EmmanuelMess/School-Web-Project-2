@@ -1,4 +1,4 @@
-<mat-grid-list cols="6" rowHeight="1:1.5" class="margin-grid">
+<mat-grid-list #grid rowHeight="1:1.5" class="margin-grid">
     <mat-grid-tile *ngFor="let weapon of weapons">
         <mat-card class="margin-card">
             <img mat-card-image [src]='weapon.imageUrl'/>
