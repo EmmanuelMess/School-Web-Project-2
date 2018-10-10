@@ -1,5 +1,6 @@
 // Import all the tools needed to customize the theme and extract parts of it
-@import '../../../../../node_modules/@angular/material/theming';
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,700|Material+Icons');
+@import '~@angular/material/theming';
 
 @include mat-core();
 

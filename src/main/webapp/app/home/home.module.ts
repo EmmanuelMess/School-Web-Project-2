@@ -1,7 +1,6 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
-import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { RouterModule } from '@angular/router';
 
@@ -16,7 +15,6 @@ import { FlexLayoutModule } from '@angular/flex-layout';
         FlexLayoutModule,
         MatGridListModule,
         MatCardModule,
-        MatButtonModule,
         MatDialogModule,
         RouterModule.forChild([HOME_ROUTE])
     ],
