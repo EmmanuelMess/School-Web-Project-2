@@ -5,7 +5,7 @@
             <mat-card-title>{{weapon.name}}</mat-card-title>
             <mat-card-content>{{weapon.description}}</mat-card-content>
             <mat-card-actions>
-                <button mat-flat-button color="accent" class="center-button">VER</button>
+                <button mat-flat-button color="accent" class="center-button" (click)="onCardButtonClicked(weapon)">VER</button>
             </mat-card-actions>
         </mat-card>
     </mat-grid-tile>
