@@ -1,4 +1,9 @@
-<h1 mat-dialog-title>Title</h1>
+<div mat-dialog-title class="title-flex">
+    <h1 class="title-content-flex">Title</h1>
+    <button mat-icon-button class="close-button" (click)="dialogRef.close()">
+        <mat-icon class="close-icon">close</mat-icon>
+    </button>
+</div>
 <div mat-dialog-content>
     <mat-divider></mat-divider>
     <p>message</p>
