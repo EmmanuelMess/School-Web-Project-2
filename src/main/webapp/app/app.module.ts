@@ -20,7 +20,7 @@ import { SchoolWebProjectEntityModule } from './entities/entity.module';
 import * as moment from 'moment';
 // jhipster-needle-angular-add-module-import JHipster will add new module here
 import { JhiMainComponent, NavbarComponent, PageRibbonComponent, ErrorComponent } from './layouts';
-import { SchoolWebProjectForumModule } from 'app/forum';
+import { SchoolWebProjectForumModule } from './forum';
 
 @NgModule({
     imports: [
