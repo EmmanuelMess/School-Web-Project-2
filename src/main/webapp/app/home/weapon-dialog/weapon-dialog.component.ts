@@ -9,9 +9,4 @@ import { Weapon } from 'app/shared/model/weapon.model';
 })
 export class WeaponDialogComponent {
     constructor(public dialogRef: MatDialogRef<WeaponDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: Weapon) {}
-
-    onGoToForumClick() {
-        //TODO go to forum
-        console.log('Error');
-    }
 }

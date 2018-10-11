@@ -1,0 +1,29 @@
+@import '../../content/scss/custom-theme.scss';
+@import '~@angular/material/theming';
+
+.list-margin {
+    margin-top: 1vh;
+}
+
+.list-chips-margin {
+    margin-top: 3vh;
+}
+
+.card-borderradius,
+.card-header-borderradius {
+    border-radius: 5px 5px 0 0;
+}
+
+.card-header {
+    margin: -24px -24px 0 -24px !important;
+    padding: 24px 24px 0 24px !important;
+    background-color: mat-color($custom-theme-primary);
+}
+
+.card-title {
+    margin-top: -5px;
+}
+
+.margin-card {
+    margin: 3vh 1vw;
+}

@@ -3,5 +3,8 @@
     <p>{{data.description}}</p>
 </div>
 <div mat-dialog-actions align="end">
-    <button mat-button mat-dialog-close>CERRAR</button><button mat-button color="accent" (click)="onGoToForumClick()">IR A FOROS</button>
+    <button mat-button mat-dialog-close>CERRAR</button>
+    <a routerLink="/forum">
+        <button mat-button color="accent">IR A FOROS</button>
+    </a>
 </div>
