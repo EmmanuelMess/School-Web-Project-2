@@ -4,7 +4,7 @@ import { FORUM_ROUTE, ForumComponent } from './';
 import { RouterModule } from '@angular/router';
 import { MatCardModule, MatListModule, MatChipsModule } from '@angular/material';
 import { SchoolWebProjectSharedModule } from 'app/shared';
-import { DialogComponent } from './message/dialog/dialog.component';
+import { MessageComponent } from './message/message.component';
 
 @NgModule({
     imports: [
@@ -15,6 +15,7 @@ import { DialogComponent } from './message/dialog/dialog.component';
         MatChipsModule,
         RouterModule.forChild([FORUM_ROUTE])
     ],
-    declarations: [ForumComponent, DialogComponent]
+    declarations: [ForumComponent, MessageComponent],
+    entryComponents: [MessageComponent]
 })
 export class SchoolWebProjectForumModule {}
