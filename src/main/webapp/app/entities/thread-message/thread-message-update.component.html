@@ -17,6 +17,13 @@
                         <option [ngValue]="threadOption.id === threadMessage.thread?.id ? threadMessage.thread : threadOption" *ngFor="let threadOption of threads; trackBy: trackThreadById">{{threadOption.id}}</option>
                     </select>
                 </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_message">Message</label>
+                    <select class="form-control" id="field_message" name="message" [(ngModel)]="threadMessage.message">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="messageOption.id === threadMessage.message?.id ? threadMessage.message : messageOption" *ngFor="let messageOption of messages; trackBy: trackMessageById">{{messageOption.id}}</option>
+                    </select>
+                </div>
             </div>
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">

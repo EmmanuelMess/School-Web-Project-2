@@ -42,9 +42,6 @@ public class ThreadResourceIntTest {
     private static final String DEFAULT_TITLE = "AAAAAAAAAA";
     private static final String UPDATED_TITLE = "BBBBBBBBBB";
 
-    private static final String DEFAULT_CONTENT = "AAAAAAAAAA";
-    private static final String UPDATED_CONTENT = "BBBBBBBBBB";
-
     @Autowired
     private ThreadRepository threadRepository;
 
@@ -83,8 +80,7 @@ public class ThreadResourceIntTest {
      */
     public static Thread createEntity(EntityManager em) {
         Thread thread = new Thread()
-            .title(DEFAULT_TITLE)
-            .content(DEFAULT_CONTENT);
+            .title(DEFAULT_TITLE);
         return thread;
     }
 
@@ -109,7 +105,6 @@ public class ThreadResourceIntTest {
         assertThat(threadList).hasSize(databaseSizeBeforeCreate + 1);
         Thread testThread = threadList.get(threadList.size() - 1);
         assertThat(testThread.getTitle()).isEqualTo(DEFAULT_TITLE);
-        assertThat(testThread.getContent()).isEqualTo(DEFAULT_CONTENT);
     }
 
     @Test
@@ -160,8 +155,7 @@ public class ThreadResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(thread.getId().intValue())))
-            .andExpect(jsonPath("$.[*].title").value(hasItem(DEFAULT_TITLE.toString())))
-            .andExpect(jsonPath("$.[*].content").value(hasItem(DEFAULT_CONTENT.toString())));
+            .andExpect(jsonPath("$.[*].title").value(hasItem(DEFAULT_TITLE.toString())));
     }
     
     @Test
@@ -175,8 +169,7 @@ public class ThreadResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(thread.getId().intValue()))
-            .andExpect(jsonPath("$.title").value(DEFAULT_TITLE.toString()))
-            .andExpect(jsonPath("$.content").value(DEFAULT_CONTENT.toString()));
+            .andExpect(jsonPath("$.title").value(DEFAULT_TITLE.toString()));
     }
 
     @Test
@@ -200,8 +193,7 @@ public class ThreadResourceIntTest {
         // Disconnect from session so that the updates on updatedThread are not directly saved in db
         em.detach(updatedThread);
         updatedThread
-            .title(UPDATED_TITLE)
-            .content(UPDATED_CONTENT);
+            .title(UPDATED_TITLE);
 
         restThreadMockMvc.perform(put("/api/threads")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -213,7 +205,6 @@ public class ThreadResourceIntTest {
         assertThat(threadList).hasSize(databaseSizeBeforeUpdate);
         Thread testThread = threadList.get(threadList.size() - 1);
         assertThat(testThread.getTitle()).isEqualTo(UPDATED_TITLE);
-        assertThat(testThread.getContent()).isEqualTo(UPDATED_CONTENT);
     }
 
     @Test

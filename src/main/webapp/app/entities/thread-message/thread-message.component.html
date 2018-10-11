@@ -16,6 +16,7 @@
             <tr>
             <th><span>ID</span></th>
             <th><span>Thread</span></th>
+            <th><span>Message</span></th>
             <th></th>
             </tr>
             </thead>
@@ -25,6 +26,11 @@
                 <td>
                     <div *ngIf="threadMessage.thread">
                         <a [routerLink]="['../thread', threadMessage.thread?.id, 'view' ]" >{{threadMessage.thread?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="threadMessage.message">
+                        <a [routerLink]="['../message', threadMessage.message?.id, 'view' ]" >{{threadMessage.message?.id}}</a>
                     </div>
                 </td>
                 <td class="text-right">

@@ -16,7 +16,6 @@
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
             <th jhiSortBy="id"><span>ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="title"><span>Title</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="content"><span>Content</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="user.login"><span>User</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
@@ -25,7 +24,6 @@
             <tr *ngFor="let thread of threads ;trackBy: trackId">
                 <td><a [routerLink]="['/thread', thread.id, 'view' ]">{{thread.id}}</a></td>
                 <td>{{thread.title}}</td>
-                <td>{{thread.content}}</td>
                 <td>
                     {{thread.user?.login}}
                 </td>

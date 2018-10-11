@@ -8,6 +8,8 @@ import { IThreadMessage } from 'app/shared/model/thread-message.model';
 import { ThreadMessageService } from './thread-message.service';
 import { IThread } from 'app/shared/model/thread.model';
 import { ThreadService } from 'app/entities/thread';
+import { IMessage } from 'app/shared/model/message.model';
+import { MessageService } from 'app/entities/message';
 
 @Component({
     selector: 'jhi-thread-message-update',
@@ -19,10 +21,13 @@ export class ThreadMessageUpdateComponent implements OnInit {
 
     threads: IThread[];
 
+    messages: IMessage[];
+
     constructor(
         private jhiAlertService: JhiAlertService,
         private threadMessageService: ThreadMessageService,
         private threadService: ThreadService,
+        private messageService: MessageService,
         private activatedRoute: ActivatedRoute
     ) {}
 
@@ -34,6 +39,21 @@ export class ThreadMessageUpdateComponent implements OnInit {
         this.threadService.query().subscribe(
             (res: HttpResponse<IThread[]>) => {
                 this.threads = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+        this.messageService.query({ filter: 'threadmessage-is-null' }).subscribe(
+            (res: HttpResponse<IMessage[]>) => {
+                if (!this.threadMessage.message || !this.threadMessage.message.id) {
+                    this.messages = res.body;
+                } else {
+                    this.messageService.find(this.threadMessage.message.id).subscribe(
+                        (subRes: HttpResponse<IMessage>) => {
+                            this.messages = [subRes.body].concat(res.body);
+                        },
+                        (subRes: HttpErrorResponse) => this.onError(subRes.message)
+                    );
+                }
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
@@ -70,6 +90,10 @@ export class ThreadMessageUpdateComponent implements OnInit {
     }
 
     trackThreadById(index: number, item: IThread) {
+        return item.id;
+    }
+
+    trackMessageById(index: number, item: IMessage) {
         return item.id;
     }
     get threadMessage() {

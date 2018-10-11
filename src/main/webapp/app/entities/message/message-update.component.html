@@ -24,14 +24,18 @@
                         </small>
                     </div>
                 </div>
-
                 <div class="form-group">
-                    <label class="form-control-label" for="field_threadMessage">Thread Message</label>
-                    <select class="form-control" id="field_threadMessage" name="threadMessage" [(ngModel)]="message.threadMessage">
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="threadMessageOption.id === message.threadMessage?.id ? message.threadMessage : threadMessageOption" *ngFor="let threadMessageOption of threadmessages; trackBy: trackThreadMessageById">{{threadMessageOption.id}}</option>
-                    </select>
+                    <label class="form-control-label" for="field_name">Name</label>
+                    <input type="text" class="form-control" name="name" id="field_name"
+                        [(ngModel)]="message.name" required/>
+                    <div [hidden]="!(editForm.controls.name?.dirty && editForm.controls.name?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.name?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
                 </div>
+
             </div>
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">

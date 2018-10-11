@@ -29,8 +29,9 @@ public class Message implements Serializable {
     @Column(name = "content", nullable = false)
     private String content;
 
-    @OneToOne    @JoinColumn(unique = true)
-    private ThreadMessage threadMessage;
+    @NotNull
+    @Column(name = "name", nullable = false)
+    private String name;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -54,17 +55,17 @@ public class Message implements Serializable {
         this.content = content;
     }
 
-    public ThreadMessage getThreadMessage() {
-        return threadMessage;
+    public String getName() {
+        return name;
     }
 
-    public Message threadMessage(ThreadMessage threadMessage) {
-        this.threadMessage = threadMessage;
+    public Message name(String name) {
+        this.name = name;
         return this;
     }
 
-    public void setThreadMessage(ThreadMessage threadMessage) {
-        this.threadMessage = threadMessage;
+    public void setName(String name) {
+        this.name = name;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -93,6 +94,7 @@ public class Message implements Serializable {
         return "Message{" +
             "id=" + getId() +
             ", content='" + getContent() + "'" +
+            ", name='" + getName() + "'" +
             "}";
     }
 }

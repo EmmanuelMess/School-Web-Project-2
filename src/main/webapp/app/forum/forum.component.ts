@@ -6,9 +6,10 @@ import { HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/ht
 import { Subscription } from 'rxjs';
 import { ThreadService } from 'app/entities/thread';
 import { JhiAlertService, JhiEventManager, JhiParseLinks } from 'ng-jhipster';
-import { Principal } from 'app/core';
+import { IUser, Principal } from 'app/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ITEMS_PER_PAGE } from 'app/shared';
+import { IMessage } from 'app/shared/model/message.model';
 
 @Component({
     selector: 'jhi-forum',
@@ -17,7 +18,7 @@ import { ITEMS_PER_PAGE } from 'app/shared';
 })
 export class ForumComponent implements OnInit {
     currentAccount: any;
-    threads: Thread[];
+    threads: ThreadWithMessages[];
     error: any;
     success: any;
     eventSubscriber: Subscription;
@@ -81,18 +82,6 @@ export class ForumComponent implements OnInit {
         this.loadAll();
     }
 
-    clear() {
-        this.page = 0;
-        this.router.navigate([
-            '/thread',
-            {
-                page: this.page,
-                sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
-            }
-        ]);
-        this.loadAll();
-    }
-
     ngOnInit() {
         this.loadAll();
         this.principal.identity().then(account => {
@@ -125,7 +114,13 @@ export class ForumComponent implements OnInit {
         this.links = this.parseLinks.parse(headers.get('link'));
         this.totalItems = parseInt(headers.get('X-Total-Count'), 10);
         this.queryCount = this.totalItems;
-        this.threads = data;
+        this.threads = this.addMessagesToThreads(data);
+    }
+
+    private addMessagesToThreads(threads: IThread[]): ThreadWithMessages[] {
+        return threads.map(function(value, index, array) {
+            return new ThreadWithMessages(value.id, value.title, value.user, []);
+        });
     }
 
     private onError(errorMessage: string) {
@@ -139,4 +134,8 @@ export class ForumComponent implements OnInit {
             data: 0
         });
     }
+}
+
+export class ThreadWithMessages implements IThread {
+    constructor(public id?: number, public title?: string, public user?: IUser, public messages?: IMessage[]) {}
 }

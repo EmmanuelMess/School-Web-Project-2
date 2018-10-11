@@ -42,6 +42,9 @@ public class MessageResourceIntTest {
     private static final String DEFAULT_CONTENT = "AAAAAAAAAA";
     private static final String UPDATED_CONTENT = "BBBBBBBBBB";
 
+    private static final String DEFAULT_NAME = "AAAAAAAAAA";
+    private static final String UPDATED_NAME = "BBBBBBBBBB";
+
     @Autowired
     private MessageRepository messageRepository;
 
@@ -80,7 +83,8 @@ public class MessageResourceIntTest {
      */
     public static Message createEntity(EntityManager em) {
         Message message = new Message()
-            .content(DEFAULT_CONTENT);
+            .content(DEFAULT_CONTENT)
+            .name(DEFAULT_NAME);
         return message;
     }
 
@@ -105,6 +109,7 @@ public class MessageResourceIntTest {
         assertThat(messageList).hasSize(databaseSizeBeforeCreate + 1);
         Message testMessage = messageList.get(messageList.size() - 1);
         assertThat(testMessage.getContent()).isEqualTo(DEFAULT_CONTENT);
+        assertThat(testMessage.getName()).isEqualTo(DEFAULT_NAME);
     }
 
     @Test
@@ -146,6 +151,24 @@ public class MessageResourceIntTest {
 
     @Test
     @Transactional
+    public void checkNameIsRequired() throws Exception {
+        int databaseSizeBeforeTest = messageRepository.findAll().size();
+        // set the field null
+        message.setName(null);
+
+        // Create the Message, which fails.
+
+        restMessageMockMvc.perform(post("/api/messages")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(message)))
+            .andExpect(status().isBadRequest());
+
+        List<Message> messageList = messageRepository.findAll();
+        assertThat(messageList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllMessages() throws Exception {
         // Initialize the database
         messageRepository.saveAndFlush(message);
@@ -155,7 +178,8 @@ public class MessageResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(message.getId().intValue())))
-            .andExpect(jsonPath("$.[*].content").value(hasItem(DEFAULT_CONTENT.toString())));
+            .andExpect(jsonPath("$.[*].content").value(hasItem(DEFAULT_CONTENT.toString())))
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())));
     }
     
     @Test
@@ -169,7 +193,8 @@ public class MessageResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(message.getId().intValue()))
-            .andExpect(jsonPath("$.content").value(DEFAULT_CONTENT.toString()));
+            .andExpect(jsonPath("$.content").value(DEFAULT_CONTENT.toString()))
+            .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()));
     }
 
     @Test
@@ -193,7 +218,8 @@ public class MessageResourceIntTest {
         // Disconnect from session so that the updates on updatedMessage are not directly saved in db
         em.detach(updatedMessage);
         updatedMessage
-            .content(UPDATED_CONTENT);
+            .content(UPDATED_CONTENT)
+            .name(UPDATED_NAME);
 
         restMessageMockMvc.perform(put("/api/messages")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -205,6 +231,7 @@ public class MessageResourceIntTest {
         assertThat(messageList).hasSize(databaseSizeBeforeUpdate);
         Message testMessage = messageList.get(messageList.size() - 1);
         assertThat(testMessage.getContent()).isEqualTo(UPDATED_CONTENT);
+        assertThat(testMessage.getName()).isEqualTo(UPDATED_NAME);
     }
 
     @Test

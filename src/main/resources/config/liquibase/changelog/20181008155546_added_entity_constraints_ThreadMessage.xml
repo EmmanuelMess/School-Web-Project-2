@@ -14,5 +14,11 @@
                                  referencedColumnNames="id"
                                  referencedTableName="thread"/>
 
+        <addForeignKeyConstraint baseColumnNames="message_id"
+                                 baseTableName="thread_message"
+                                 constraintName="fk_thread_message_message_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="message"/>
+
     </changeSet>
 </databaseChangeLog>

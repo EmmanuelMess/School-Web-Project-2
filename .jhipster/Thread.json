@@ -20,10 +20,6 @@
                 "minlength"
             ],
             "fieldValidateRulesMinlength": "1"
-        },
-        {
-            "fieldName": "content",
-            "fieldType": "String"
         }
     ],
     "changelogDate": "20181008154733",

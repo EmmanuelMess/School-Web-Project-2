@@ -11,6 +11,12 @@
                         <a [routerLink]="['/thread', threadMessage.thread?.id, 'view']">{{threadMessage.thread?.id}}</a>
                     </div>
                 </dd>
+                <dt><span>Message</span></dt>
+                <dd>
+                    <div *ngIf="threadMessage.message">
+                        <a [routerLink]="['/message', threadMessage.message?.id, 'view']">{{threadMessage.message?.id}}</a>
+                    </div>
+                </dd>
             </dl>
 
             <button type="submit"

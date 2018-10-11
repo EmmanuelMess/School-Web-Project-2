@@ -7,6 +7,14 @@
             "otherEntityName": "thread",
             "relationshipType": "many-to-one",
             "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "message",
+            "otherEntityName": "message",
+            "relationshipType": "one-to-one",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "threadMessage"
         }
     ],
     "fields": [],

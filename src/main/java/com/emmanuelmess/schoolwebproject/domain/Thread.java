@@ -30,9 +30,6 @@ public class Thread implements Serializable {
     @Column(name = "title", nullable = false)
     private String title;
 
-    @Column(name = "content")
-    private String content;
-
     @ManyToOne
     @JsonIgnoreProperties("")
     private User user;
@@ -57,19 +54,6 @@ public class Thread implements Serializable {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public Thread content(String content) {
-        this.content = content;
-        return this;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
     }
 
     public User getUser() {
@@ -111,7 +95,6 @@ public class Thread implements Serializable {
         return "Thread{" +
             "id=" + getId() +
             ", title='" + getTitle() + "'" +
-            ", content='" + getContent() + "'" +
             "}";
     }
 }

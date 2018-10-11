@@ -28,6 +28,9 @@ public class ThreadMessage implements Serializable {
     @JsonIgnoreProperties("")
     private Thread thread;
 
+    @OneToOne    @JoinColumn(unique = true)
+    private Message message;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -48,6 +51,19 @@ public class ThreadMessage implements Serializable {
 
     public void setThread(Thread thread) {
         this.thread = thread;
+    }
+
+    public Message getMessage() {
+        return message;
+    }
+
+    public ThreadMessage message(Message message) {
+        this.message = message;
+        return this;
+    }
+
+    public void setMessage(Message message) {
+        this.message = message;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

@@ -24,9 +24,11 @@
             <column name="content" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
-            <column name="thread_message_id" type="bigint">
-                <constraints unique="true" nullable="true" uniqueConstraintName="ux_message_thread_message_id" />
+
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false" />
             </column>
+
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
         

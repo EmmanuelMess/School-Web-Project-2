@@ -9,11 +9,9 @@
                 <dd>
                     <span>{{message.content}}</span>
                 </dd>
-                <dt><span>Thread Message</span></dt>
+                <dt><span>Name</span></dt>
                 <dd>
-                    <div *ngIf="message.threadMessage">
-                        <a [routerLink]="['/thread-message', message.threadMessage?.id, 'view']">{{message.threadMessage?.id}}</a>
-                    </div>
+                    <span>{{message.name}}</span>
                 </dd>
             </dl>
 

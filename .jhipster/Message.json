@@ -1,16 +1,7 @@
 {
     "fluentMethods": true,
     "clientRootFolder": "",
-    "relationships": [
-        {
-            "relationshipName": "threadMessage",
-            "otherEntityName": "threadMessage",
-            "relationshipType": "one-to-one",
-            "otherEntityField": "id",
-            "ownerSide": true,
-            "otherEntityRelationshipName": "message"
-        }
-    ],
+    "relationships": [],
     "fields": [
         {
             "fieldName": "content",
@@ -20,6 +11,13 @@
                 "minlength"
             ],
             "fieldValidateRulesMinlength": "1"
+        },
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
         }
     ],
     "changelogDate": "20181008154945",

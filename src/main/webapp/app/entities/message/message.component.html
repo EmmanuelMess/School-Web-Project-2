@@ -16,7 +16,7 @@
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
             <th jhiSortBy="id"><span>ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="content"><span>Content</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="threadMessage.id"><span>Thread Message</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="name"><span>Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
             </thead>
@@ -24,11 +24,7 @@
             <tr *ngFor="let message of messages ;trackBy: trackId">
                 <td><a [routerLink]="['/message', message.id, 'view' ]">{{message.id}}</a></td>
                 <td>{{message.content}}</td>
-                <td>
-                    <div *ngIf="message.threadMessage">
-                        <a [routerLink]="['../thread-message', message.threadMessage?.id, 'view' ]" >{{message.threadMessage?.id}}</a>
-                    </div>
-                </td>
+                <td>{{message.name}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

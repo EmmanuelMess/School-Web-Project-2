@@ -1,11 +1,9 @@
-import { IThreadMessage } from 'app/shared/model//thread-message.model';
-
 export interface IMessage {
     id?: number;
     content?: string;
-    threadMessage?: IThreadMessage;
+    name?: string;
 }
 
 export class Message implements IMessage {
-    constructor(public id?: number, public content?: string, public threadMessage?: IThreadMessage) {}
+    constructor(public id?: number, public content?: string, public name?: string) {}
 }
