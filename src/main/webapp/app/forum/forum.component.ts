@@ -10,6 +10,7 @@ import { IUser, Principal } from 'app/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ITEMS_PER_PAGE } from 'app/shared';
 import { IMessage } from 'app/shared/model/message.model';
+import { MessageService } from 'app/entities/message';
 
 @Component({
     selector: 'jhi-forum',
@@ -34,6 +35,7 @@ export class ForumComponent implements OnInit {
 
     constructor(
         private dialog: MatDialog,
+        private messageService: MessageService,
         private threadService: ThreadService,
         private parseLinks: JhiParseLinks,
         private jhiAlertService: JhiAlertService,
@@ -119,8 +121,21 @@ export class ForumComponent implements OnInit {
 
     private addMessagesToThreads(threads: IThread[]): ThreadWithMessages[] {
         return threads.map(function(value, index, array) {
-            return new ThreadWithMessages(value.id, value.title, value.user, []);
-        });
+            let thread = new ThreadWithMessages(value.id, value.title, value.user, []);
+
+            this.messageService
+                .query({
+                    page: 1,
+                    size: 9999, // TODO correct pagination
+                    sort: ['id', 'asc']
+                })
+                .subscribe(
+                    (res: HttpResponse<IMessage[]>) => (thread.messages = res.body),
+                    (res: HttpErrorResponse) => this.onError(res.message)
+                );
+
+            return thread;
+        }, this);
     }
 
     private onError(errorMessage: string) {
