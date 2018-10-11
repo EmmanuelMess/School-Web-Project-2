@@ -6,6 +6,7 @@
         <mat-card-content class="list-chips-margin">
             <mat-chip-list class="mat-chip-list-stacked">
                 <mat-chip color="accent" (click)="onChipClick()" *ngFor="let message of thread.messages">{{message.content}}</mat-chip>
+                <mat-chip color="accent" (click)="onChipClick()">Ejemplo 1</mat-chip>
             </mat-chip-list>
         </mat-card-content>
         <mat-card-actions align="end">

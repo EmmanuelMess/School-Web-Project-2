@@ -27,6 +27,8 @@
     "clientPackageManager": "npm",
     "testFrameworks": [],
     "jhiPrefix": "jhi",
-    "enableTranslation": false
+    "enableTranslation": false,
+    "herokuAppName": "school-web-project",
+    "herokuDeployType": "git"
   }
 }
