@@ -1,7 +1,7 @@
 <mat-list role="list" class="list-margin">
-    <mat-card *ngFor="let weapon of weapons" class="margin-card card-borderradius">
+    <mat-card *ngFor="let thread of threads" class="margin-card card-borderradius">
         <mat-card-header class="card-header card-header-borderradius">
-            <mat-card-title class="card-title">weapon title</mat-card-title>
+            <mat-card-title class="card-title">{{thread.title}}</mat-card-title>
         </mat-card-header>
         <mat-card-content class="list-chips-margin">
             <mat-chip-list class="mat-chip-list-stacked">
