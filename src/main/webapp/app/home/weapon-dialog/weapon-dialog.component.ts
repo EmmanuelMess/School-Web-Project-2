@@ -5,7 +5,7 @@ import { Weapon } from 'app/shared/model/weapon.model';
 @Component({
     selector: 'jhi-weapon-dialog',
     templateUrl: './weapon-dialog.component.html',
-    styles: []
+    styleUrls: ['./weapon-dialog.scss']
 })
 export class WeaponDialogComponent {
     constructor(public dialogRef: MatDialogRef<WeaponDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: Weapon) {}
