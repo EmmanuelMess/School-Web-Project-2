@@ -110,6 +110,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .antMatchers("/api/messages").permitAll()
             .antMatchers("/api/thread").permitAll()
             .antMatchers("/api/threads").permitAll()
+            .antMatchers("/api/weapon").permitAll()
+            .antMatchers("/api/weapons").permitAll()
             .antMatchers("/api/**").authenticated()
             .antMatchers("/management/health").permitAll()
             .antMatchers("/management/info").permitAll()
