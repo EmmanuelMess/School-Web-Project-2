@@ -1,0 +1,38 @@
+@import '../../../content/scss/custom-theme.scss';
+@import '~@angular/material/theming';
+
+.drawer-height {
+    height: 100vh;
+}
+
+.drawer-width {
+    width: 256px;
+}
+
+.drawer-button {
+    width: 256px;
+    height: 48px;
+    border-radius: 0;
+
+    display: flex;
+    justify-content:center;
+    align-content:center;
+    flex-direction:column;
+
+    font-size: 14pt;
+    text-align: start;
+    text-decoration: none;
+
+    :hover {
+        color: mat-color($custom-theme-primary);
+        font-weight: unset;
+    }
+}
+
+.drawer-button-clicked {
+    color: mat-color($custom-theme-primary);
+}
+
+.drawer-content {
+    margin-left: 256px !important;
+}

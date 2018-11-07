@@ -19,7 +19,7 @@ import { SchoolWebProjectAccountModule } from './account/account.module';
 import { SchoolWebProjectEntityModule } from './entities/entity.module';
 import * as moment from 'moment';
 // jhipster-needle-angular-add-module-import JHipster will add new module here
-import { JhiMainComponent, NavbarComponent, PageRibbonComponent, ErrorComponent } from './layouts';
+import { JhiMainComponent, NavbarComponent, PageRibbonComponent, ErrorComponent, SidenavComponent } from './layouts';
 import { SchoolWebProjectForumModule } from './forum';
 
 @NgModule({
@@ -35,7 +35,7 @@ import { SchoolWebProjectForumModule } from './forum';
         SchoolWebProjectForumModule
         // jhipster-needle-angular-add-module JHipster will add new module here
     ],
-    declarations: [JhiMainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent],
+    declarations: [JhiMainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, SidenavComponent],
     providers: [
         {
             provide: HTTP_INTERCEPTORS,

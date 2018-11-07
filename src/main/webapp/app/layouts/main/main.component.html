@@ -1,8 +1,10 @@
-<jhi-page-ribbon></jhi-page-ribbon>
-<div>
-    <router-outlet name="navbar"></router-outlet>
-</div>
-<div class="container-fluid">
-    <router-outlet></router-outlet>
-    <router-outlet name="popup"></router-outlet>
-</div>
+<jhi-sidenav>
+    <jhi-page-ribbon></jhi-page-ribbon>
+    <div>
+        <router-outlet name="navbar"></router-outlet>
+    </div>
+    <div class="container-fluid">
+        <router-outlet></router-outlet>
+        <router-outlet name="popup"></router-outlet>
+    </div>
+</jhi-sidenav>

@@ -4,7 +4,7 @@ import { NgbDateAdapter } from '@ng-bootstrap/ng-bootstrap';
 import { NgbDateMomentAdapter } from './util/datepicker-adapter';
 import { SchoolWebProjectSharedLibsModule, SchoolWebProjectSharedCommonModule, JhiLoginModalComponent, HasAnyAuthorityDirective } from './';
 
-import { MatButtonModule, MatToolbarModule, MatIconModule } from '@angular/material';
+import {MatButtonModule, MatToolbarModule, MatIconModule, MatSidenavModule} from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
@@ -14,6 +14,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
         MatButtonModule,
         MatToolbarModule,
         MatIconModule,
+        MatSidenavModule,
         BrowserAnimationsModule
     ],
     declarations: [JhiLoginModalComponent, HasAnyAuthorityDirective],
@@ -24,6 +25,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
         MatButtonModule,
         MatToolbarModule,
         MatIconModule,
+        MatSidenavModule,
         JhiLoginModalComponent,
         HasAnyAuthorityDirective
     ],

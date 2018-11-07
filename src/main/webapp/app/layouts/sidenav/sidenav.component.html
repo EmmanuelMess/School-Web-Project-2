@@ -1,0 +1,11 @@
+<mat-drawer-container class="drawer-height">
+    <mat-drawer mode="side" class="drawer-width" opened>
+        <img src="../../../content/images/icon.jpg" width="256"/>
+        <a mat-flat-button routerLink="." [color]="selectedInDrawer == 0? 'primary':'white'" class="drawer-button">Pagina principal</a>
+        <a mat-flat-button routerLink="./forum" [color]="selectedInDrawer == 1? 'primary':'white'"
+           class="drawer-button" ng-bind="drawerForumButton">Foro</a>
+    </mat-drawer>
+    <mat-drawer-content class="drawer-content">
+        <ng-content></ng-content>
+    </mat-drawer-content>
+</mat-drawer-container>
