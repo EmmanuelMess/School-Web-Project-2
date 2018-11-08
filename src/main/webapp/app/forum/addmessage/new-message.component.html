@@ -1,0 +1,14 @@
+<mat-dialog-content>
+    <form>
+        <mat-form-field class='field-width'>
+            <input matInput [(ngModel)]='title' [ngModelOptions]="{standalone: true}" placeholder='Titulo'>
+        </mat-form-field>
+
+        <mat-form-field class='field-width'>
+            <textarea matInput [(ngModel)]='content' [ngModelOptions]="{standalone: true}" placeholder='Contenido'></textarea>
+        </mat-form-field>
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions align='end'>
+    <button mat-button color='accent' (click)='onAcceptClick(title, content)'>Aceptar</button>
+</mat-dialog-actions>

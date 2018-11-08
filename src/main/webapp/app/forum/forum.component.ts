@@ -1,16 +1,19 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material';
-import { MessageComponent } from 'app/forum/message/message.component';
-import { IThread, Thread } from 'app/shared/model/thread.model';
-import { HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
-import { Subscription } from 'rxjs';
-import { ThreadService } from 'app/entities/thread';
-import { JhiAlertService, JhiEventManager, JhiParseLinks } from 'ng-jhipster';
-import { IUser, Principal } from 'app/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ITEMS_PER_PAGE } from 'app/shared';
-import { IMessage } from 'app/shared/model/message.model';
-import { MessageService } from 'app/entities/message';
+import {Component, OnInit} from '@angular/core';
+import {MatDialog} from '@angular/material';
+import {MessageComponent} from 'app/forum/message/message.component';
+import {IThread} from 'app/shared/model/thread.model';
+import {HttpErrorResponse, HttpHeaders, HttpResponse} from '@angular/common/http';
+import {Subscription} from 'rxjs';
+import {ThreadService} from 'app/entities/thread';
+import {JhiAlertService, JhiEventManager, JhiParseLinks} from 'ng-jhipster';
+import {IUser, Principal} from 'app/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {ITEMS_PER_PAGE} from 'app/shared';
+import {IMessage, Message} from 'app/shared/model/message.model';
+import {MessageService} from 'app/entities/message';
+import {NewMessageComponent} from 'app/forum/addmessage/new-message.component';
+import {ThreadMessageService} from 'app/entities/thread-message';
+import {IThreadMessage, ThreadMessage} from 'app/shared/model/thread-message.model';
 
 @Component({
     selector: 'jhi-forum',
@@ -33,10 +36,13 @@ export class ForumComponent implements OnInit {
     previousPage: any;
     reverse: any;
 
+    private messagesToThreadMap: Map<number, number>;
+
     constructor(
         private dialog: MatDialog,
         private messageService: MessageService,
         private threadService: ThreadService,
+        private threadMessageService: ThreadMessageService,
         private parseLinks: JhiParseLinks,
         private jhiAlertService: JhiAlertService,
         private principal: Principal,
@@ -120,33 +126,76 @@ export class ForumComponent implements OnInit {
     }
 
     private addMessagesToThreads(threads: IThread[]): ThreadWithMessages[] {
-        return threads.map(function(value, index, array) {
-            let thread = new ThreadWithMessages(value.id, value.title, value.user, []);
-
-            this.messageService
-                .query({
-                    page: 1,
-                    size: 9999, // TODO correct pagination
-                    sort: ['id', 'asc']
-                })
-                .subscribe(
-                    (res: HttpResponse<IMessage[]>) => (thread.messages = res.body),
-                    (res: HttpErrorResponse) => this.onError(res.message)
-                );
-
-            return thread;
+        const newThreads = threads.map(function(value, index, array) {
+            return new ThreadWithMessages(value.id, value.title, value.user, []);
         }, this);
+
+        this.messageService
+            .query()
+            .subscribe(
+                (res: HttpResponse<IMessage[]>) => {
+                    const messages = res.body;
+
+                    if(this.messagesToThreadMap === undefined) {
+                        this.threadMessageService
+                            .query()
+                            .subscribe(
+                                (res: HttpResponse<IThreadMessage[]>) => {
+                                    this.processThreadMessages(res.body);
+
+                                    newThreads.forEach((value, index, array) => {
+                                        this.addMessage(value, messages);
+                                    });
+                                },
+                                (res: HttpErrorResponse) => this.onError(res.message)
+                            );
+                    } else {
+                        newThreads.forEach((value, index, array) => {
+                            this.addMessage(value, messages);
+                        });
+                    }
+                },
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
+
+        return newThreads;
+    }
+
+    private addMessage(thread: ThreadWithMessages, messages: Message[]) {
+        for (let i = 0; i < messages.length; i++) {
+            const message = messages[i];
+
+            if (thread.id === this.messagesToThreadMap.get(message.id)) {
+                thread.messages.push(message);
+            }
+        }
+    }
+
+    private processThreadMessages(threadMessages: IThreadMessage[]) {
+        this.messagesToThreadMap = new Map<number, number>();
+        threadMessages.forEach((value, index, array) => {
+            this.messagesToThreadMap.set(value.message.id, value.thread.id);
+        });
     }
 
     private onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);
     }
 
-    onChipClick() {
+    onChipClick(message: IMessage) {
         this.dialog.open(MessageComponent, {
             width: '75%',
             height: '75%',
-            data: 0
+            data: message
+        });
+    }
+
+    onAddClick(thread: ThreadWithMessages) {
+        this.dialog.open(NewMessageComponent, {
+            width: '50%',
+            data: thread
+        }).afterClosed().subscribe(result => {
+            thread.messages.push(result);
         });
     }
 }
