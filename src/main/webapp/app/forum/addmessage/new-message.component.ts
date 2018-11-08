@@ -14,6 +14,9 @@ import {IThreadMessage, ThreadMessage} from "app/shared/model/thread-message.mod
 })
 export class NewMessageComponent  {
 
+    title: string;
+    content: string;
+
     constructor(private messageService: MessageService,
                 private threadMessageService: ThreadMessageService,
                 public dialogRef: MatDialogRef<NewMessageComponent>,
