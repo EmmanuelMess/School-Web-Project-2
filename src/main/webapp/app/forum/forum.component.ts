@@ -195,6 +195,9 @@ export class ForumComponent implements OnInit {
             width: '50%',
             data: thread
         }).afterClosed().subscribe(result => {
+            if(result === undefined) {
+                return;
+            }
             thread.messages.push(result);
         });
     }
