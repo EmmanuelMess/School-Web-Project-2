@@ -2,7 +2,7 @@
     <mat-grid-tile *ngFor="let weapon of weapons">
         <mat-card class="margin-card">
             <img mat-card-image [src]='weapon.imageUrl'/>
-            <mat-card-title>{{weapon.name}}</mat-card-title>
+            <mat-card-title class="smaller-typography">{{weapon.name}}</mat-card-title>
             <mat-card-actions>
                 <button mat-flat-button color="accent" class="center-button" (click)="onCardButtonClicked(weapon)">VER</button>
             </mat-card-actions>
