@@ -8,7 +8,7 @@ export class LoginModalService {
     private isOpen = false;
     constructor(private modalService: NgbModal) {}
 
-    open(): NgbModalRef {
+    open(callback?: () => void): NgbModalRef {
         if (this.isOpen) {
             return;
         }
@@ -16,9 +16,15 @@ export class LoginModalService {
         const modalRef = this.modalService.open(JhiLoginModalComponent);
         modalRef.result.then(
             result => {
+                if(callback != null) {
+                    callback();
+                }
                 this.isOpen = false;
             },
             reason => {
+                if(callback != null) {
+                    callback();
+                }
                 this.isOpen = false;
             }
         );

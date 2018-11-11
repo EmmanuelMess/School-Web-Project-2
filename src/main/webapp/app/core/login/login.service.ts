@@ -31,8 +31,11 @@ export class LoginService {
         return this.authServerProvider.loginWithToken(jwt, rememberMe);
     }
 
-    logout() {
+    logout(callback?: () => void) {
         this.authServerProvider.logout().subscribe();
         this.principal.authenticate(null);
+        if(callback != null) {
+            callback();
+        }
     }
 }

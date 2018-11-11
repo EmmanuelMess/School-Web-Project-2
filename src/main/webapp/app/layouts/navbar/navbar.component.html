@@ -2,8 +2,12 @@
     <mat-toolbar-row>
         <span>Projecto Schujman</span>
         <span class="spacer"></span>
-        <button mat-icon-button (click)="login()">
+        <span *ngIf="name != null">{{name}}</span>
+        <button *ngIf="name == null" mat-icon-button (click)="login()">
             <mat-icon>account_circle</mat-icon>
+        </button>
+        <button *ngIf="name != null" mat-icon-button (click)="logout()">
+            <mat-icon>last_page</mat-icon>
         </button>
     </mat-toolbar-row>
 </mat-toolbar>

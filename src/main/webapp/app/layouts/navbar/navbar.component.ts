@@ -12,6 +12,8 @@ import { ProfileService } from '../profiles/profile.service';
     styleUrls: ['navbar.scss']
 })
 export class NavbarComponent implements OnInit {
+    public name: string;
+
     inProduction: boolean;
     isNavbarCollapsed: boolean;
     languages: any[];
@@ -28,6 +30,7 @@ export class NavbarComponent implements OnInit {
     ) {
         this.version = VERSION ? 'v' + VERSION : '';
         this.isNavbarCollapsed = true;
+        this.updateName();
     }
 
     ngOnInit() {
@@ -46,12 +49,16 @@ export class NavbarComponent implements OnInit {
     }
 
     login() {
-        this.modalRef = this.loginModalService.open();
+        this.modalRef = this.loginModalService.open(() => {
+            this.updateName();
+        });
     }
 
     logout() {
         this.collapseNavbar();
-        this.loginService.logout();
+        this.loginService.logout(() => {
+            this.updateName();
+        });
         this.router.navigate(['']);
     }
 
@@ -61,5 +68,15 @@ export class NavbarComponent implements OnInit {
 
     getImageUrl() {
         return this.isAuthenticated() ? this.principal.getImageUrl() : null;
+    }
+
+    private updateName() {
+        this.principal.identity().then(account => {
+            if (account == null) {
+                this.name = null;
+            } else {
+                this.name = account.login;
+            }
+        });
     }
 }
