@@ -1,27 +1,8 @@
 {
     "fluentMethods": true,
     "clientRootFolder": "",
-    "relationships": [
-        {
-            "relationshipName": "user",
-            "otherEntityName": "user",
-            "relationshipType": "many-to-one",
-            "otherEntityField": "login",
-            "ownerSide": true,
-            "otherEntityRelationshipName": "thread"
-        }
-    ],
-    "fields": [
-        {
-            "fieldName": "title",
-            "fieldType": "String",
-            "fieldValidateRules": [
-                "required",
-                "minlength"
-            ],
-            "fieldValidateRulesMinlength": "1"
-        }
-    ],
+    "relationships": [],
+    "fields": [],
     "changelogDate": "20181008154733",
     "dto": "no",
     "searchEngine": false,

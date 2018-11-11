@@ -16,7 +16,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -49,7 +48,7 @@ public class ThreadResource {
      */
     @PostMapping("/threads")
     @Timed
-    public ResponseEntity<Thread> createThread(@Valid @RequestBody Thread thread) throws URISyntaxException {
+    public ResponseEntity<Thread> createThread(@RequestBody Thread thread) throws URISyntaxException {
         log.debug("REST request to save Thread : {}", thread);
         if (thread.getId() != null) {
             throw new BadRequestAlertException("A new thread cannot already have an ID", ENTITY_NAME, "idexists");
@@ -71,7 +70,7 @@ public class ThreadResource {
      */
     @PutMapping("/threads")
     @Timed
-    public ResponseEntity<Thread> updateThread(@Valid @RequestBody Thread thread) throws URISyntaxException {
+    public ResponseEntity<Thread> updateThread(@RequestBody Thread thread) throws URISyntaxException {
         log.debug("REST request to update Thread : {}", thread);
         if (thread.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");

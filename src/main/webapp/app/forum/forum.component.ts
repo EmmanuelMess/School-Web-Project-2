@@ -14,6 +14,8 @@ import {MessageService} from 'app/entities/message';
 import {NewMessageComponent} from 'app/forum/addmessage/new-message.component';
 import {ThreadMessageService} from 'app/entities/thread-message';
 import {IThreadMessage, ThreadMessage} from 'app/shared/model/thread-message.model';
+import {WeaponService} from "app/entities/weapon";
+import {IWeapon} from "app/shared/model/weapon.model";
 
 @Component({
     selector: 'jhi-forum',
@@ -40,6 +42,7 @@ export class ForumComponent implements OnInit {
 
     constructor(
         private dialog: MatDialog,
+        private weaponService: WeaponService,
         private messageService: MessageService,
         private threadService: ThreadService,
         private threadMessageService: ThreadMessageService,
@@ -60,14 +63,14 @@ export class ForumComponent implements OnInit {
     }
 
     loadAll() {
-        this.threadService
+        this.weaponService
             .query({
                 page: this.page - 1,
                 size: this.itemsPerPage,
                 sort: this.sort()
             })
             .subscribe(
-                (res: HttpResponse<IThread[]>) => this.paginateThreads(res.body, res.headers),
+                (res: HttpResponse<IWeapon[]>) => this.paginateThreads(res.body, res.headers),
                 (res: HttpErrorResponse) => this.onError(res.message)
             );
     }
@@ -80,7 +83,7 @@ export class ForumComponent implements OnInit {
     }
 
     transition() {
-        this.router.navigate(['/thread'], {
+        this.router.navigate(['/forum'], {
             queryParams: {
                 page: this.page,
                 size: this.itemsPerPage,
@@ -107,7 +110,7 @@ export class ForumComponent implements OnInit {
     }
 
     registerChangeInThreads() {
-        this.eventSubscriber = this.eventManager.subscribe('threadListModification', response => this.loadAll());
+        this.eventSubscriber = this.eventManager.subscribe('weaponListModification', response => this.loadAll());
     }
 
     sort() {
@@ -118,16 +121,16 @@ export class ForumComponent implements OnInit {
         return result;
     }
 
-    private paginateThreads(data: IThread[], headers: HttpHeaders) {
+    private paginateThreads(data: IWeapon[], headers: HttpHeaders) {
         this.links = this.parseLinks.parse(headers.get('link'));
         this.totalItems = parseInt(headers.get('X-Total-Count'), 10);
         this.queryCount = this.totalItems;
         this.threads = this.addMessagesToThreads(data);
     }
 
-    private addMessagesToThreads(threads: IThread[]): ThreadWithMessages[] {
-        const newThreads = threads.map(function(value, index, array) {
-            return new ThreadWithMessages(value.id, value.title, value.user, []);
+    private addMessagesToThreads(weapons: IWeapon[]): ThreadWithMessages[] {
+        const newThreads = weapons.map(function(value, index, array) {
+            return new ThreadWithMessages(value.thread.id, value.name, []);
         }, this);
 
         this.messageService
@@ -204,5 +207,5 @@ export class ForumComponent implements OnInit {
 }
 
 export class ThreadWithMessages implements IThread {
-    constructor(public id?: number, public title?: string, public user?: IUser, public messages?: IMessage[]) {}
+    constructor(public id?: number, public title?: string, public messages?: IMessage[]) {}
 }

@@ -1,11 +1,9 @@
 package com.emmanuelmess.schoolwebproject.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -25,15 +23,6 @@ public class Thread implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @NotNull
-    @Size(min = 1)
-    @Column(name = "title", nullable = false)
-    private String title;
-
-    @ManyToOne
-    @JsonIgnoreProperties("")
-    private User user;
-
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -41,32 +30,6 @@ public class Thread implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public Thread title(String title) {
-        this.title = title;
-        return this;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public Thread user(User user) {
-        this.user = user;
-        return this;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -94,7 +57,6 @@ public class Thread implements Serializable {
     public String toString() {
         return "Thread{" +
             "id=" + getId() +
-            ", title='" + getTitle() + "'" +
             "}";
     }
 }

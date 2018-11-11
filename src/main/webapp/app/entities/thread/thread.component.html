@@ -15,18 +15,12 @@
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
             <th jhiSortBy="id"><span>ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="title"><span>Title</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="user.login"><span>User</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let thread of threads ;trackBy: trackId">
                 <td><a [routerLink]="['/thread', thread.id, 'view' ]">{{thread.id}}</a></td>
-                <td>{{thread.title}}</td>
-                <td>
-                    {{thread.user?.login}}
-                </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

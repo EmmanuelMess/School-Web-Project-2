@@ -39,9 +39,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = SchoolWebProjectApp.class)
 public class ThreadResourceIntTest {
 
-    private static final String DEFAULT_TITLE = "AAAAAAAAAA";
-    private static final String UPDATED_TITLE = "BBBBBBBBBB";
-
     @Autowired
     private ThreadRepository threadRepository;
 
@@ -79,8 +76,7 @@ public class ThreadResourceIntTest {
      * if they test an entity which requires the current entity.
      */
     public static Thread createEntity(EntityManager em) {
-        Thread thread = new Thread()
-            .title(DEFAULT_TITLE);
+        Thread thread = new Thread();
         return thread;
     }
 
@@ -104,7 +100,6 @@ public class ThreadResourceIntTest {
         List<Thread> threadList = threadRepository.findAll();
         assertThat(threadList).hasSize(databaseSizeBeforeCreate + 1);
         Thread testThread = threadList.get(threadList.size() - 1);
-        assertThat(testThread.getTitle()).isEqualTo(DEFAULT_TITLE);
     }
 
     @Test
@@ -128,24 +123,6 @@ public class ThreadResourceIntTest {
 
     @Test
     @Transactional
-    public void checkTitleIsRequired() throws Exception {
-        int databaseSizeBeforeTest = threadRepository.findAll().size();
-        // set the field null
-        thread.setTitle(null);
-
-        // Create the Thread, which fails.
-
-        restThreadMockMvc.perform(post("/api/threads")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(thread)))
-            .andExpect(status().isBadRequest());
-
-        List<Thread> threadList = threadRepository.findAll();
-        assertThat(threadList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
     public void getAllThreads() throws Exception {
         // Initialize the database
         threadRepository.saveAndFlush(thread);
@@ -154,8 +131,7 @@ public class ThreadResourceIntTest {
         restThreadMockMvc.perform(get("/api/threads?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(thread.getId().intValue())))
-            .andExpect(jsonPath("$.[*].title").value(hasItem(DEFAULT_TITLE.toString())));
+            .andExpect(jsonPath("$.[*].id").value(hasItem(thread.getId().intValue())));
     }
     
     @Test
@@ -168,8 +144,7 @@ public class ThreadResourceIntTest {
         restThreadMockMvc.perform(get("/api/threads/{id}", thread.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-            .andExpect(jsonPath("$.id").value(thread.getId().intValue()))
-            .andExpect(jsonPath("$.title").value(DEFAULT_TITLE.toString()));
+            .andExpect(jsonPath("$.id").value(thread.getId().intValue()));
     }
 
     @Test
@@ -192,8 +167,6 @@ public class ThreadResourceIntTest {
         Thread updatedThread = threadRepository.findById(thread.getId()).get();
         // Disconnect from session so that the updates on updatedThread are not directly saved in db
         em.detach(updatedThread);
-        updatedThread
-            .title(UPDATED_TITLE);
 
         restThreadMockMvc.perform(put("/api/threads")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -204,7 +177,6 @@ public class ThreadResourceIntTest {
         List<Thread> threadList = threadRepository.findAll();
         assertThat(threadList).hasSize(databaseSizeBeforeUpdate);
         Thread testThread = threadList.get(threadList.size() - 1);
-        assertThat(testThread.getTitle()).isEqualTo(UPDATED_TITLE);
     }
 
     @Test
