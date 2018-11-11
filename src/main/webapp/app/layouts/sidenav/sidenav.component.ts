@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {NavigationEnd, ResolveStart, Router, RouterEvent} from "@angular/router";
+import {NavigationEnd, ResolveStart, Router, RouterEvent} from '@angular/router';
 
 @Component({
   selector: 'jhi-sidenav',

@@ -14,8 +14,8 @@ import {MessageService} from 'app/entities/message';
 import {NewMessageComponent} from 'app/forum/addmessage/new-message.component';
 import {ThreadMessageService} from 'app/entities/thread-message';
 import {IThreadMessage, ThreadMessage} from 'app/shared/model/thread-message.model';
-import {WeaponService} from "app/entities/weapon";
-import {IWeapon} from "app/shared/model/weapon.model";
+import {WeaponService} from 'app/entities/weapon';
+import {IWeapon} from 'app/shared/model/weapon.model';
 
 @Component({
     selector: 'jhi-forum',

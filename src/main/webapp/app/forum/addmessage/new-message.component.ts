@@ -1,11 +1,11 @@
 import {Component, Inject, Input, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef, MatFormFieldModule, MatInputModule } from "@angular/material";
-import {IMessage, Message} from "app/shared/model/message.model";
-import {IThread} from "app/shared/model/thread.model";
-import {MessageService} from "app/entities/message";
-import {HttpErrorResponse, HttpResponse} from "@angular/common/http";
-import {ThreadMessageService} from "app/entities/thread-message";
-import {IThreadMessage, ThreadMessage} from "app/shared/model/thread-message.model";
+import {MAT_DIALOG_DATA, MatDialogRef, MatFormFieldModule, MatInputModule } from '@angular/material';
+import {IMessage, Message} from 'app/shared/model/message.model';
+import {IThread} from 'app/shared/model/thread.model';
+import {MessageService} from 'app/entities/message';
+import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
+import {ThreadMessageService} from 'app/entities/thread-message';
+import {IThreadMessage, ThreadMessage} from 'app/shared/model/thread-message.model';
 
 @Component({
   selector: 'jhi-addmessage',
